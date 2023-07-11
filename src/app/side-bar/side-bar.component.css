@@ -1,0 +1,19 @@
+.nav-link{
+    padding: 1vh;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-bottom: 2vh;
+    border-radius: 10px 10px 10px 10px;
+}
+.nav-link:hover{
+    background-color: #a3ddfa;
+    color: black;
+}
+.active{
+    background-color: rgb(106, 90, 205);
+    
+    
+}
+nav{
+    height: 90vh;
+}

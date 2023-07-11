@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.css';
+body {
+    margin: 0px !important;
+    padding : 0px !important;
+  }
+
+
+.bg{
+  color: white;
+  background-color: rgb(106, 90, 205)
+}

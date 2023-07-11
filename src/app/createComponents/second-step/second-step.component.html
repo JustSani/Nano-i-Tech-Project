@@ -1,0 +1,31 @@
+<form >
+    <div class="row">
+        <div class="form-group col">
+            <label >Cognome</label>
+            <input type="text" class="form-control" required placeholder="Sanino">
+        </div>
+        <div class="form-group col">
+            <label >Nome</label>
+            <input type="text" class="form-control" required placeholder="Fabio">
+        </div>
+        <div class="form-group col">
+            <label >CAP</label>
+            <input type="text" maxlength="5" required class="form-control" placeholder="12042">
+        </div>
+        
+    </div>
+    <br>
+    <div class="form-group">
+        <label ></label>
+        <select class="form-select" aria-label="Default select example" [(ngModel)]="selectVal">
+            <option value="1">Codice Fiscale/P.IVA</option>
+            <option value="2">Luogo e Data di Nascita</option>
+          </select>
+
+        <!--ng-template #>
+            <span *ngIf="showYear">{{b.key}}</span>mostraThAnno
+        </ng-template-->
+    </div>
+    
+
+</form>
