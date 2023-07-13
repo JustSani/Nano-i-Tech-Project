@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent {
-  selection:any = 0; // 0 == step 1; 1 == step 2 Persona Fisica, ; 2 == step-2-persona-giuridica; 3 == step 3
+  selection:any = 1; // 0 == step 1; 1 == step 2 Persona Fisica, ; 2 == step-2-persona-giuridica; 3 == step 3
   ButtonText:string = "Avanti"; //testo bottone
 
-  NgOnInit(){
+  ngOnInit(){
   }
   nextStep($event: any){ 
     // true equivale alla scelta "Persona Fisica"
@@ -24,12 +24,14 @@ export class CreateComponent {
     }
   }
   next(){ // gestione bottone per andare avanti tra le opzioni
-    if(this.selection != 3)
+    if(this.selection != 3){
       this.selection = 3;
-    
-    if(this.selection == 3){
       this.ButtonText = "Fine"
+    }
+    else if(this.selection == 3){
       //DO SOMETHINGG
+      this.selection = 0;
+      this.ButtonText = "Avanti"
     }
   }
 }

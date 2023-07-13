@@ -6,14 +6,14 @@
     border-radius: 10px 10px 10px 10px;
 }
 .nav-link:hover{
-    background-color: #a3ddfa;
+    background-color: #b796fe;
     color: black;
+    cursor: pointer;
 }
 .active{
     background-color: rgb(106, 90, 205);
     
-    
 }
 nav{
-    height: 90vh;
+    height: 100%;
 }

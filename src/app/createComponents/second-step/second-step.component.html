@@ -1,31 +1,154 @@
-<form >
+<form class="border rounded p-3 " id="form">
+    <h3>Anagrafica:</h3>
+    <b>Dati personali:</b>
     <div class="row">
         <div class="form-group col">
             <label >Cognome</label>
-            <input type="text" class="form-control" required placeholder="Sanino">
+            <input type="text" id="txtCognome" class="form-control" required placeholder="Sanino">
         </div>
         <div class="form-group col">
             <label >Nome</label>
-            <input type="text" class="form-control" required placeholder="Fabio">
+            <input type="text" id="txtNome" class="form-control" required placeholder="Fabio">
         </div>
         <div class="form-group col">
             <label >CAP</label>
-            <input type="text" maxlength="5" required class="form-control" placeholder="12042">
+            <input type="text" id="txtCap" maxlength="5" name="banana" required class="form-control " [(ngModel)]="cap" placeholder="12042">
         </div>
         
     </div>
     <br>
-    <div class="form-group">
-        <label ></label>
-        <select class="form-select" aria-label="Default select example" [(ngModel)]="selectVal">
-            <option value="1">Codice Fiscale/P.IVA</option>
-            <option value="2">Luogo e Data di Nascita</option>
-          </select>
+        
+        <div class="border rounded p-3">
+            <b>Metodo Di riconoscimento:</b>
+            <select class="form-select" #metodo (change)="onSelected(metodo.value)" >
+                <option >Codice Fiscale</option>
+                <option>P.IVA</option>
+                <option >Luogo e Data di Nascita</option>
+            </select>
 
-        <!--ng-template #>
-            <span *ngIf="showYear">{{b.key}}</span>mostraThAnno
-        </ng-template-->
+            
+            <br>
+            <div class="form-group" *ngIf="selectVal == 'Codice Fiscale'">
+                <label>Codice Fiscale</label>
+                <br>
+                <input type="text" id="txtCodFisc" name="codFisc" [(ngModel)]="codFisc" class="form-control" placeholder="SNNFBA05G09B112F"  required>
+            </div>
+            
+            <div class="form-group" *ngIf="selectVal == 'P.IVA'">
+                <label>Parita Iva</label>
+                <br>
+                <input type="text" id="txtPiva" class="form-control" placeholder="89765432101"  required>
+            </div>
+
+            <div class="row" *ngIf="selectVal == 'Luogo e Data di Nascita'">
+                <div class="form-group col">
+                    <label>Luogo</label><br>
+                    <input type="text" id="txtLuogo" class="form-control" placeholder="Torino"  required>
+                </div>
+                <div class="form-group col">
+                    <label>Data di Nascita</label><br>
+                    <input type="date" id="dtNascita" class="form-control"  required>
+                </div>
+            </div>
+        </div>
+    <br>
+    <hr>
+    <br>
+    <h3>Informazioni:</h3>
+    <b>Componenti del Nucleo Familiare:</b>
+
+    <div class="d-flex flex-row">
+        
+        <div class="form-group " style="margin-right: 5px;">
+            <span>Numero</span>
+            <input type="number" id="nParenti" min="0" value="0" class="custom-input " style="max-width: 40%;" required >
+        </div>
+
+        <div style="margin-left: 3vw;">Tipologia Componenti:</div>
+        <div class="form-check " >
+            <input type="checkbox" class="form-check-input" id="chkConiuge">
+            <span>Coniuge</span>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="chkFigli" (click)="chkFigli()">
+            <span>Figli (n° </span>
+            <input id="nFigli" disabled value="0" min="0" type="number" class="custom-input" style=" max-width: 25%;">
+            <span>)</span>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="chkPadre">
+            <span>Padre</span>
+        </div>
+        <div class="form-check ">
+            <input type="checkbox" class="form-check-input" id="chkMadre">
+            <span>Madre</span>
+        </div>
+
     </div>
+    
+    <br>
+    <b>Attività esercitata:</b>
+    <div class="d-flex flex-row mx-auto " style="width: 80%;">
+        <div class="form-check " >
+            <input type="radio" class="form-check-input" name="attivita" required>
+            <span>Dipendente</span>
+        </div>
+        <div class="form-check " >
+            <input type="radio" class="form-check-input" name="attivita" required>
+            <span>Libero Professionista o Lavoratore Autonomo</span>
+        </div>
+        <div class="form-check " >
+            <input type="radio" class="form-check-input" name="attivita" required>
+            <span>Non Occupato</span>
+        </div>
+    </div>
+    <div class="form-group d-flex flex-row " style="margin: auto; width: 30%; height: 25px;" >
+        <input type="radio" class="form-check-input" name="attivita" required>
+        <span>Altro</span>
+        <input type="input"  class="custom-input" style="max-width: 25%;">
+    </div>
+    <br>
+    <div class="d-flex flex-row">
+        <b >Immobili di Proprietà:</b>
+        <div class="form-check " >
+            <input type="radio" name="properties" class="form-check-input" required>
+            <span>SI</span>
+        </div>
+        <div class="form-check " >
+            <input type="radio" name="properties" class="form-check-input" required>
+            <span>NO</span>
+        </div>
+    </div>
+    <br>
+    <div class="d-flex flex-row">
+        <b >Possesso di Animali Domestici:</b>
+        <div class="form-check " >
+            <input type="radio" name="animals" class="form-check-input" required>
+            <span>cani e/o gatti</span>
+        </div>
+        <div class="form-check " >
+            <input type="radio" name="animals" class="form-check-input" required>
+            <span>altro</span>
+        </div>
+        <div class="form-check " >
+            <input type="radio" name="animals" class="form-check-input" required>
+            <span>NO</span>
+        </div>
+    </div>
+    <br>
+    <div class="alert alert-danger" role="alert" *ngIf="errore1">
+        Il numero dei componenti del nucleo Familiare dichiarato(<b>{{numeroParenti}}</b>) e il numero di attributi selezionati(<b>{{contaParenti}}</b>) non combaciano
+    </div>
+    <br>
+    <input type="submit" class="btn btn-primary" value="Avanti" (click)="save()">
+    
+    <br>
+
+    
     
 
 </form>
+
+<br>
+<br>
+<br>

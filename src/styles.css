@@ -10,3 +10,12 @@ body {
   color: white;
   background-color: rgb(106, 90, 205)
 }
+
+.btn-primary{
+  background-color: rgb(106, 90, 205)
+}
+
+.btn-primary:hover{
+  background-color: #b796fe;
+  color: black;
+}
