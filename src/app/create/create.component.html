@@ -1,9 +1,21 @@
+<div class="modal" id="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Operazione Completata con successo!</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
 <div class="bg-light wrapper" >
     <app-first-step *ngIf="selection == 0" (selection)="nextStep($event)"></app-first-step>
     <app-second-step *ngIf="selection == 1" (selection)="nextStep($event)" ></app-second-step>
     <app-second-step-persona-giuridica *ngIf="selection == 2" (selection)="nextStep($event)" ></app-second-step-persona-giuridica>
     <app-third-step *ngIf="selection == 3" (selection)="nextStep($event)"></app-third-step>
-    
-    
 </div>
 
