@@ -58,12 +58,11 @@ mongoFunctions.prototype.find=function (res, col, find, select){
 }
 
 
-mongoFunctions.prototype.insertOne=function (res, col, obj, callback){
+mongoFunctions.prototype.insertOne=function (res, col, obj){
     creaConnessione(nomeDb, res, function(conn, db){
         let promise = db.collection(col).insertOne(obj);
-        promise.then(function(ris){
-             
-            callback(ris)
+        promise.then(function(ris){ 
+            res.end("{code:1, mess: 'done'}")
         });
         promise.catch(function(err){
             obj = { cod:-2, desc:"Errore nell'inserimento"}
