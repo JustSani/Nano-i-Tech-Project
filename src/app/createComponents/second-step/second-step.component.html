@@ -37,17 +37,17 @@
             <div class="form-group" *ngIf="selectVal == 'P.IVA'">
                 <label>Parita Iva</label>
                 <br>
-                <input type="text" maxlength="11" id="txtPiva" [(ngModel)]="pIva" class="form-control" placeholder="89765432101"  required>
+                <input type="text" maxlength="11" name="pIva" id="txtPiva" [(ngModel)]="pIva" class="form-control" placeholder="89765432101"  required>
             </div>
 
             <div class="row" *ngIf="selectVal == 'Luogo e Data di Nascita'">
                 <div class="form-group col">
                     <label>Luogo</label><br>
-                    <input type="text" id="txtLuogo" [(ngModel)]="luogo" class="form-control" placeholder="Torino"  required>
+                    <input type="text" id="txtLuogo" [(ngModel)]="luogo" name="barbascura" class="form-control" placeholder="Torino"  required>
                 </div>
                 <div class="form-group col">
                     <label>Data di Nascita</label><br>
-                    <input type="date" id="dtNascita"  [(ngModel)]="nascita" class="form-control"  required>
+                    <input type="date" id="dtNascita"  [(ngModel)]="nascita" name="bisognaDareUnNome" class="form-control"  required>
                 </div>
             </div>
         </div>

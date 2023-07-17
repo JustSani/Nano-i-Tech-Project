@@ -69,7 +69,16 @@ export class SecondStepPersonaGiuridicaComponent {
     }
     
     if(controlliOk){
-      this.thirdStep({pagina: 3});
+      let data = {
+        ragSoc:$("#txtRagione").val(),
+        pIva:this.pIva,
+        cap: this.cap,
+        settore:$("#txtSet").val(),
+        immobili:$("input[name='immobili']:checked").val()
+
+      }
+
+      this.thirdStep({pagina: 3, data: data});
     }
   }
 }

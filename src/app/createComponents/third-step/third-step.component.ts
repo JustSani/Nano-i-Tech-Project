@@ -122,7 +122,71 @@ export class ThirdStepComponent {
     }
 
     if(controlliOk){
-      this.closeModule({pagina: 4})
+      let data = {
+        ambito: $("input[name='ambito']:checked").val(),
+        copertureAssicurative: {
+          "Responsabilità Civile": $("#chkRespCivil").prop("checked"),
+          "Infortuni": $("#chkInfor").prop("checked"),
+          "Malattie": $("#chkMalat").prop("checked"),
+          "Incendio": $("#chkIncen").prop("checked"),
+          "Furto": $("#chkFurto").prop("checked"),
+          "Cauzioni": $("#chkCauz").prop("checked"),
+          "Previdenza": $("#chkPrevid").prop("checked"),
+          "Multi rischi in Genere": $("#chkMulti").prop("checked"),
+          "Tutela Legale": $("#chkTut").prop("checked"),
+          "Trasporti": $("#chkTrasp").prop("checked"),
+          "Auto": $("#chkAuto").prop("checked"),
+          "Altro": $("#chkAltro").prop("checked")
+        },
+        obbiettivi: new Array(),
+      }
+      if($("input[name='patrimonio']:checked").val()){
+        data.obbiettivi.push({"Protezione del proprio patrimonio per richieste di risarcimento dovute a danni causati a terzi": $("input[name='patrimonio']:checked").val()})
+      }
+
+      if($("input[name='beni']:checked").val()){
+        let arr = []
+        if($("#chkDann").prop("checked"))
+          arr.push("per danneggiamento (es: incendio, scoppio, acqua condotta, esplosione, etc)")
+        if($("#chkSottr").prop("checked"))
+          arr.push("per sottrazione (es: furto, scippo, rapina, etc)")
+        if($("#chkTrasf").prop("checked"))
+          arr.push("per trasferimento, trasporti")
+
+        data.obbiettivi.push({
+          "Protezione dei beni": $("input[name='beni']:checked").val(), 
+          per: arr
+        })
+      }
+      if($("input[name='tutela']:checked").val()){
+        data.obbiettivi.push({"Tutela legale":$("input[name='tutela']:checked").val()})
+      }
+      if($("#chkSestessi").prop("checked") || $("#chkFamiglia").prop("checked")){
+        
+        let array = []
+        if($("#chkSestessi").prop("checked"))
+          array.push("se stessi")
+        if($("#chkFamiglia").prop("checked"))
+          array.push("la famiglia") // Dom Toretto        
+        
+        
+        let specific = []
+
+        if($("#chkInfortuni").prop("checked"))
+          specific.push("per infortuni")
+        if($("#chkMalattia").prop("checked"))
+          specific.push("per malattia") // Dom Toretto        
+        if($("#chkMorte").prop("checked"))
+          specific.push("per morte") 
+
+        data.obbiettivi.push({"Protezione della propria persona e/o dei familiari": array, 
+        "E in maniera specifica": specific})
+      }
+      if($("input[name='viaggi']:checked").val()){
+        data.obbiettivi.push({"Protezione viaggi":$("input[name='viaggi']:checked").val()})
+      }
+
+      this.closeModule({pagina: 4, data: data})
     }
 
     

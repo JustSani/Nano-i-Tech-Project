@@ -106,7 +106,7 @@ export class SecondStepComponent {
           controlliOk = false;
         }
 
-        if(this.checkValueNotNull("dtNascita")){
+        if(!this.checkValueNotNull("dtNascita")){
           controlliOk = false;
         }
         
@@ -187,18 +187,18 @@ export class SecondStepComponent {
         cognome: $("#txtCognome").val(),
         nome: $("#txtNome").val(),
         cap: $("#txtCap").val(),
-        metodo: valore,
+        metodo: {metodo: metodo, valore: valore},
         numeroParenti: numeroParenti,
-        coniuge: salvaParenti[0],
-        padre: salvaParenti[1],
-        madre: salvaParenti[2],
+        coniuge: $("#chkConiuge").prop('checked'),
+        padre: $("#chkPadre").prop('checked'),
+        madre: $("#chkMadre").prop('checked'),
         figli: Number($("#nFigli").val()),
         attivita: $("input[name='attivita']:checked").val(),
         immmobili: $("input[name='properties']:checked").val(),
         animali: $("input[name='animals']:checked").val()
       }
       
-      
+      console.log(data)
       this.thirdStep({pagina: 3, data : data})
     }
 
