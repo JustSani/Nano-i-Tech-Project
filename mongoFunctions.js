@@ -3,13 +3,11 @@
 const mongo=require("mongodb");
 const mongoClient=mongo.MongoClient;
 
-const error = require("./returnErrors");
 
 // ----------------------------
 // IMPOSTAZIONI PRESE DAL CONFIG
-const conf = require("../config/serverConfig")
-const urlServerMongoDb = conf.urlMongo;
-const nomeDb = conf.database;
+const urlServerMongoDb = "mongodb://localhost:27017";
+const nomeDb = "NanoITech";
 // ----------------------------
 
 
@@ -46,11 +44,11 @@ mongoFunctions.prototype.query = function(res, col, callback){
     })
 }
 
-mongoFunctions.prototype.find=function (res, col, find, select, callback){
+mongoFunctions.prototype.find=function (res, col, find, select){
     creaConnessione(nomeDb, res, function(conn, db){
         let promise = db.collection(col).find(find).project(select).toArray();
         promise.then(function(ris){
-            callback(ris)
+            res.end(JSON.stringify(ris))
         });
         promise.catch(function(error){
             obj = { code:-2, desc:"Errore nella ricerca"}

@@ -4,6 +4,9 @@ const express = require("express");
 const cors = require('cors');
 const app = express();
 
+
+const mongoFunctions = require("./mongoFunctions");
+
 /*
 const conf = require("./config/serverConfig")
 const port = conf.port
@@ -18,16 +21,23 @@ app.use(express.json());
 app.use(cors()); //-> dkdc
 //
 
+// middleware per mostrare solo le richieste
 app.use("/", function(req,res,next){
-    if(req.originalUrl.includes("api"))
-        console.log(req.originalUrl)
+    console.log(req.originalUrl)
     next()
 })
 
-app.get("/", function(req,res){
-    res.end("Whatsup")
+app.post("/insert", function(req,res){
+    console.log(req.body)
+    // convalidare lato server i parametri diventava davvero troppo lungo, ma lo faccio se voelte :)
+    mongoFunctions.insertOne(res, "modules", req.body, function(){
+        res.end("Done");
+    })    
 })
 
+app.get("/show", function(req,res){
+    mongoFunctions.find(res, "modules", {salve: "testicolo"}, {})
+})
 
 
 app.listen(port,  () => {
