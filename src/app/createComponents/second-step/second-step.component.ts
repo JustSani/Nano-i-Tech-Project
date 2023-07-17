@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import * as $ from 'jquery';
 
 @Component({
@@ -12,9 +12,21 @@ export class SecondStepComponent {
   contaParenti: number = 0;
   numeroParenti: number = 0;
   errore1: boolean = false;
+
+
+
   cap: any = "";
   codFisc: any = "";
-  
+  pIva: any = "";
+  luogo: any= "";
+  nascita: any = "";
+
+  @Output() selection = new EventEmitter;
+
+  thirdStep(val: any){
+    this.selection.emit(val)
+  }
+
   onSelected(value: any){
     this.selectVal = value;
   }
@@ -22,31 +34,6 @@ export class SecondStepComponent {
     //$("#form").addClass("was-validated")
 
     let controlliOk = true;
-
-    // controlli nucleo familiare
-    let nucleoChecks = ["Coniuge", "Padre", "Madre"];
-    let numeroParenti = Number($("#nParenti").val());
-    
-    let contaParenti = 0;
-    // scorriamo tutte le checkbox e contiamo quante sono a true
-    nucleoChecks.forEach(parente => {
-      if($("#chk" + parente).prop('checked')){
-        contaParenti++;
-      }
-    });
-    // sommiamo il numero di figli dichiarati
-    contaParenti += Number($("#nFigli").val())
-
-    if(contaParenti != numeroParenti){
-      this.errore1 = true
-      $("#nParenti").addClass("custom-input-error")
-      controlliOk = false;
-    }
-
-    this.contaParenti = contaParenti;
-    this.numeroParenti = numeroParenti;
-
-
     // controllo input non vuoti
     let checkVuoti = ["Cognome", "Cap", "Nome"]
     checkVuoti.forEach(nome => {
@@ -73,10 +60,13 @@ export class SecondStepComponent {
       CAP.addClass("is-valid")
     }
 
+    let metodo = ""
+    let valore = ""
     //Controlli metodo di riconoscimento
-    let toCheck = [""];
     switch(this.selectVal){
       case "Codice Fiscale":
+        metodo = "Codice Fiscale"
+        valore = this.codFisc
 
         if(this.checkValueNotNull("txtCodFisc")){
 
@@ -95,8 +85,12 @@ export class SecondStepComponent {
 
         break;
       case "P.IVA":
+        metodo = "P.IVA"
+        valore = this.pIva
+
         if(this.checkValueNotNull("txtPiva")){
-          
+          if(isNaN(this.pIva))
+            controlliOk = false;
         }
         else{
           controlliOk = false;
@@ -105,6 +99,8 @@ export class SecondStepComponent {
         
         break;
       case "Luogo e Data di Nascita":
+        metodo = "Luogo e Data di Nascita"
+        valore = this.luogo + " " + this.nascita
 
         if(!this.checkValueNotNull("txtLuogo")){
           controlliOk = false;
@@ -117,10 +113,99 @@ export class SecondStepComponent {
         break;
 
     }
+
+    // -----------------------
+    // Controlli Informazioni
+    // -----------------------
+
+    let salvaParenti = [false]
+    // controlli nucleo familiare
+    let nucleoChecks = ["Coniuge", "Padre", "Madre"];
+    let numeroParenti = Number($("#nParenti").val());
+    
+    let contaParenti = 0;
+    // scorriamo tutte le checkbox e contiamo quante sono a true
+    let i = 0;
+    nucleoChecks.forEach(parente => {
+      if($("#chk" + parente).prop('checked')){
+        salvaParenti[i] = true;
+        contaParenti++;
+      }
+      else
+        salvaParenti[i] = false;
+    });
+    // sommiamo il numero di figli dichiarati
+    contaParenti += Number($("#nFigli").val())
+
+    if(contaParenti != numeroParenti){
+      this.errore1 = true
+      $("#nParenti").addClass("custom-input-error")
+      controlliOk = false;
+    }else{
+      $("#nParenti").removeClass("custom-input-error")
+      this.errore1 = false
+    }
+
+    this.contaParenti = contaParenti;
+    this.numeroParenti = numeroParenti;
+
+    // attivita esercitat
+    if($("input[name='attivita']:checked").val() == undefined){
+      controlliOk = false;
+      $(".attivita").removeClass("is-valid")
+      $(".attivita").addClass("is-invalid")
+    }else{
+      $(".attivita").removeClass("is-invalid")
+      $(".attivita").addClass("is-valid")
+    }
+
+    // attivita esercitat
+    if($("input[name='properties']:checked").val() == undefined){
+      controlliOk = false;
+      $(".properties").addClass("is-invalid")
+      $(".properties").removeClass("is-valid")
+    }else{
+      $(".properties").removeClass("is-invalid")
+      $(".properties").addClass("is-valid")
+    }
+
+    // possesso animali
+    if($("input[name='animals']:checked").val() == undefined){
+      controlliOk = false;
+      $(".animals").addClass("is-invalid")
+      $(".animals").removeClass("is-valid")
+    }else{
+      $(".animals").removeClass("is-invalid")
+      $(".animals").addClass("is-valid")
+    }
+
+
+
+    // prossimo step se tutti i controlli sonoo rispettati
+    if(controlliOk){
+      let data = {
+        cognome: $("#txtCognome").val(),
+        nome: $("#txtNome").val(),
+        cap: $("#txtCap").val(),
+        metodo: valore,
+        numeroParenti: numeroParenti,
+        coniuge: salvaParenti[0],
+        padre: salvaParenti[1],
+        madre: salvaParenti[2],
+        figli: Number($("#nFigli").val()),
+        attivita: $("input[name='attivita']:checked").val(),
+        immmobili: $("input[name='properties']:checked").val(),
+        animali: $("input[name='animals']:checked").val()
+      }
+      
+      
+      this.thirdStep({pagina: 3, data : data})
+    }
+
+  
   }
   checkValueNotNull(par: string){
     if($("#" + par).val() == ""){
-      
       $("#" + par).removeClass("is-valid");
       $("#" + par).addClass("is-invalid");
       return false;

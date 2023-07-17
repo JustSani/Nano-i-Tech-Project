@@ -8,6 +8,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class FirstStepComponent {
   @Output() selection = new EventEmitter;
   secondStep(val: any){
-    this.selection.emit(val)
+    if(val)
+      this.selection.emit({pagina: 1})
+    else
+      this.selection.emit({pagina: 2})
+    
   }
 }

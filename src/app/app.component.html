@@ -2,8 +2,8 @@
   <a class="navbar-brand " style="margin-left: 2vw;" href="#"><h2>Nano Insurance Modules!</h2></a>
 </nav>
 
-<div class="d-flex flex-row">
-  <app-side-bar [selectionNum]="selection" (newValue)="setSelection($event)" style="min-height: 90vh; width: 25vw;" ></app-side-bar>
-  <app-create *ngIf="selection == 0" style="min-height: 90vh; width: 75vw;"></app-create >
+<div class="d-flex flex-row" style=" margin: auto;">
+  <app-side-bar [selectionNum]="selection" (newValue)="setSelection($event)" style="min-height: 90vh; width: 25vw; max-width: 300px;" ></app-side-bar>
+  <app-create *ngIf="selection == 0" style="min-height: 90vh; width: 100%;"></app-create >
   <app-reports *ngIf="selection == 1"></app-reports>
 </div>

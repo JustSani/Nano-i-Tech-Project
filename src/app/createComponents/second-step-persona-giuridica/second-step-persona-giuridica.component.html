@@ -3,15 +3,15 @@
     <div class="row">
         <div class="form-group col">
             <label >Ragione Sociale</label>
-            <input type="text" class="form-control" required placeholder="Nano i-tech">
+            <input type="text" class="form-control" required placeholder="Nano i-tech" id="txtRagione">
         </div>
         <div class="form-group col">
             <label >P.IVA</label>
-            <input type="text" class="form-control" required placeholder="89765432101">
+            <input type="text" class="form-control" name="piva" required placeholder="89765432101" maxlength="11" [(ngModel)]="pIva" id="txtPiva">
         </div>
         <div class="form-group col">
             <label >CAP</label>
-            <input type="text" maxlength="5" required class="form-control" placeholder="12042">
+            <input type="text" maxlength="5" name="cap" required class="form-control" placeholder="12042" [(ngModel)]="cap" id="txtCap">
         </div>
         
     </div>
@@ -24,28 +24,28 @@
     
     <div class="form-group d-flex flex-row">
         <b>Numero dipendenti:</b>
-        <input type="number"  style="height: 30px; width: 10%; margin-left: 10px;" >
+        <input type="number"  value="1" min="1" class="custom-input"  id="numDipendenti">
     </div>
     <br>
     <div class="form-group">
         <b>Settore Merceologico:</b>
-        <input type="text" class="form-control"> 
+        <input type="text" class="form-control" id="txtSet"> 
     </div>
     
     <br>
     <div class="d-flex flex-row">
         <b >Immobili di Proprietà:</b>
         <div class="form-check " >
-            <input type="checkbox" class="form-check-input" >
+            <input type="checkbox" class="form-check-input immobili" value="SI" name="immobili">
             <span>SI</span>
         </div>
         <div class="form-check " >
-            <input type="checkbox" class="form-check-input" >
+            <input type="checkbox" class="form-check-input immobili" value="NO" name="immobili">
             <span>NO</span>
         </div>
     </div>
-   
-    
+    <br>   
+    <input type="submit" class="btn btn-primary" value="Avanti" (click)="save()">
     <br>
 </form>
 

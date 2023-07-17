@@ -37,17 +37,17 @@
             <div class="form-group" *ngIf="selectVal == 'P.IVA'">
                 <label>Parita Iva</label>
                 <br>
-                <input type="text" id="txtPiva" class="form-control" placeholder="89765432101"  required>
+                <input type="text" maxlength="11" id="txtPiva" [(ngModel)]="pIva" class="form-control" placeholder="89765432101"  required>
             </div>
 
             <div class="row" *ngIf="selectVal == 'Luogo e Data di Nascita'">
                 <div class="form-group col">
                     <label>Luogo</label><br>
-                    <input type="text" id="txtLuogo" class="form-control" placeholder="Torino"  required>
+                    <input type="text" id="txtLuogo" [(ngModel)]="luogo" class="form-control" placeholder="Torino"  required>
                 </div>
                 <div class="form-group col">
                     <label>Data di Nascita</label><br>
-                    <input type="date" id="dtNascita" class="form-control"  required>
+                    <input type="date" id="dtNascita"  [(ngModel)]="nascita" class="form-control"  required>
                 </div>
             </div>
         </div>
@@ -85,25 +85,29 @@
         </div>
 
     </div>
+    <br>
+    <div class="alert alert-danger" role="alert" *ngIf="errore1">
+        Il numero dei componenti del nucleo Familiare dichiarato(<b>{{numeroParenti}}</b>) e il numero di attributi selezionati(<b>{{contaParenti}}</b>) non combaciano
+    </div>
     
     <br>
     <b>Attività esercitata:</b>
     <div class="d-flex flex-row mx-auto " style="width: 80%;">
         <div class="form-check " >
-            <input type="radio" class="form-check-input" name="attivita" required>
+            <input type="radio" class="form-check-input attivita" name="attivita" value="Dipendente" required>
             <span>Dipendente</span>
         </div>
         <div class="form-check " >
-            <input type="radio" class="form-check-input" name="attivita" required>
+            <input type="radio" class="form-check-input attivita" name="attivita" value="Libero Professionista o Lavoratore Autonomo" required>
             <span>Libero Professionista o Lavoratore Autonomo</span>
         </div>
         <div class="form-check " >
-            <input type="radio" class="form-check-input" name="attivita" required>
+            <input type="radio" class="form-check-input attivita" name="attivita" value="Non Occupato" required>
             <span>Non Occupato</span>
         </div>
     </div>
     <div class="form-group d-flex flex-row " style="margin: auto; width: 30%; height: 25px;" >
-        <input type="radio" class="form-check-input" name="attivita" required>
+        <input type="radio" class="form-check-input attivita" name="attivita" value="Altro"  required>
         <span>Altro</span>
         <input type="input"  class="custom-input" style="max-width: 25%;">
     </div>
@@ -111,11 +115,11 @@
     <div class="d-flex flex-row">
         <b >Immobili di Proprietà:</b>
         <div class="form-check " >
-            <input type="radio" name="properties" class="form-check-input" required>
+            <input type="radio" name="properties" class="form-check-input properties" value="SI" required>
             <span>SI</span>
         </div>
         <div class="form-check " >
-            <input type="radio" name="properties" class="form-check-input" required>
+            <input type="radio" name="properties" class="form-check-input properties" value="NO" required>
             <span>NO</span>
         </div>
     </div>
@@ -123,22 +127,19 @@
     <div class="d-flex flex-row">
         <b >Possesso di Animali Domestici:</b>
         <div class="form-check " >
-            <input type="radio" name="animals" class="form-check-input" required>
+            <input type="radio" name="animals" class="form-check-input animals " value="cani e/o gatti" required>
             <span>cani e/o gatti</span>
         </div>
         <div class="form-check " >
-            <input type="radio" name="animals" class="form-check-input" required>
+            <input type="radio" name="animals" class="form-check-input animals" value="altro" required>
             <span>altro</span>
         </div>
         <div class="form-check " >
-            <input type="radio" name="animals" class="form-check-input" required>
+            <input type="radio" name="animals" class="form-check-input animals" value="NO" required>
             <span>NO</span>
         </div>
     </div>
-    <br>
-    <div class="alert alert-danger" role="alert" *ngIf="errore1">
-        Il numero dei componenti del nucleo Familiare dichiarato(<b>{{numeroParenti}}</b>) e il numero di attributi selezionati(<b>{{contaParenti}}</b>) non combaciano
-    </div>
+    
     <br>
     <input type="submit" class="btn btn-primary" value="Avanti" (click)="save()">
     
