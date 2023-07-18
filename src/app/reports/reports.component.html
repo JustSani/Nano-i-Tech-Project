@@ -19,9 +19,9 @@
         </div>
     </div>
 </div>
-
-<div *ngIf="hide" class="p-4 border rounded clearfix">
+<div *ngIf="hide" class="p-4 border rounded m-4 w-100">
     <button class="btn btn-primary float-right" (click)="hide = !hide">Indietro</button>
+    <br>
     <br>
     <div class="row ">
         <div class="col">
@@ -72,7 +72,7 @@
 
     <h3>Tabella:</h3>
 
-    <table class="table">
+    <table class="table table-striped table-hover">
         <tbody>
             <tr *ngFor="let key of keys(modulo.persona)">
                 <td *ngIf="key != 'metodo'">{{key}}</td>

@@ -1,10 +1,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<nav class="navbar navbar-dark bg">
-  <a class="navbar-brand " style="margin-left: 2vw;" href="#"><h2>Nano Insurance Modules!</h2></a>
-</nav>
+<div class="bg">
+  <nav class="navbar navbar-dark bg" style="min-height: 5vh; max-width: 1920px; margin: auto;">
+    <a class="navbar-brand " style="margin-left: 2vw;" href="#"><h2>Valutazione delle Richieste del Contraente!</h2></a>
+  </nav>
+</div>
 
-<div class="d-flex flex-row" style=" margin: auto;">
-  <app-side-bar [selectionNum]="selection" (newValue)="setSelection($event)" style="min-height: 90vh; width: 25vw; max-width: 300px;" ></app-side-bar>
+<div class="d-flex flex-row" style=" margin: auto; max-width: 1920px;">
+  <app-side-bar [selectionNum]="selection" (newValue)="setSelection($event)" style="min-height: 95vh; width: 25vw; max-width: 300px;" ></app-side-bar>
   <app-create *ngIf="selection == 0" style="min-height: 90vh; width: 100%;"></app-create >
   <app-reports *ngIf="selection == 1"></app-reports>
 </div>
