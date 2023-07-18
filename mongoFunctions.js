@@ -6,7 +6,7 @@ const mongoClient=mongo.MongoClient;
 
 // ----------------------------
 // IMPOSTAZIONI PRESE DAL CONFIG
-const urlServerMongoDb = "mongodb://localhost:27017";
+const urlServerMongoDb = "mongodb+srv://admin:admin@cluster0.r7k5a6f.mongodb.net/?retryWrites=true&w=majority";
 const nomeDb = "NanoITech";
 // ----------------------------
 
