@@ -7,11 +7,13 @@ import {ConnectionService} from "./connection.service";
 })
 export class ModulesService {
   dataModules: any[] = [];
+  res: any;
   constructor(private connectionService: ConnectionService) { }
 
   postModule(data: any){
-    this.connectionService.sendPostRequest("/insert", JSON.stringify(data)).subscribe(
+    this.connectionService.sendPostRequest("/insert", data).subscribe(
       (serverData: any)=>{
+        this.res = serverData;
         console.log("Done");
       },
       (error: any)=>{
@@ -22,9 +24,9 @@ export class ModulesService {
   }
 
   getModules(){
-    this.connectionService.sendPostRequest("/show", {}).subscribe(
+    this.connectionService.sendGetRequest("/show").subscribe(
       (serverData: any)=>{
-        this.dataModules=serverData.data;
+        this.dataModules=serverData;
         console.log("Server Data:");
         console.log(this.dataModules);
       },

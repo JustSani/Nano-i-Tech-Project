@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter  } from '@angular/core';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-third-step',

@@ -1,1 +1,111 @@
-<p>reports works!</p>
+<div class="p-4 row" *ngIf="!hide">
+    <div class="card col-2-md" style="width: 18rem; margin: 2px" *ngFor="let key of modulesService.dataModules; let i = index">
+        <div class="card-body" (click)="show(key)">
+        
+            <h5 class="card-title" *ngIf="key.persona.ragSoc">{{key.persona.ragSoc}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted" *ngIf="key.persona.ragSoc">Persona Giuridica</h6>        
+        
+            <h5 class="card-title" *ngIf="key.persona.nome">{{key.persona.nome}} {{key.persona.cognome}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted" *ngIf="key.persona.nome">Persona Fisica</h6>
+            
+            <hr>
+            
+            <p class="card-text"><b>Obbiettivi:</b> 
+                <span *ngFor="let obbiettivo of key.assicurazione.obbiettivi">
+                    <br>
+                    <span *ngFor="let item of keysCleaned(obbiettivo)">{{item}}</span>
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="hide" class="p-4 border rounded clearfix">
+    <button class="btn btn-primary float-right" (click)="hide = !hide">Indietro</button>
+    <br>
+    <div class="row ">
+        <div class="col">
+            <h3>Persona:</h3>
+            <ul>
+                <li *ngFor="let key of keys(modulo.persona)">
+                    <span *ngIf="key != 'metodo'">{{key}}: {{modulo.persona[key]}}</span>
+                    <span *ngIf="key == 'metodo'">
+                        {{modulo.persona.metodo.metodo}} : {{modulo.persona.metodo.valore}}
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+            <h3>Assicurazione</h3>
+            <ul>
+                <li>Ambito: {{modulo.assicurazione.ambito}}</li>
+                <li>
+                    Coperture Assicurative esistenti:
+                    <ul>
+                        <li *ngFor="let key of getAssicurazioni(modulo.assicurazione.copertureAssicurative) ">{{key}}</li>
+                    </ul>
+                </li>
+                <li>
+                    Obbiettivi Assicurativi:
+                    <ul>
+                        <li *ngFor="let element of modulo.assicurazione.obbiettivi">
+                            {{keys(element)[0]}}
+                            <ul>
+                                <li>
+                                    {{element[keys(element)[0]]}}
+                                </li>
+                            </ul>
+                            <span *ngIf="keys(element)[1]">{{keys(element)[1]}}</span>
+                            <ul>
+                                <li *ngFor="let valore of element[keys(element)[1]]">
+                                    {{valore}}
+                                </li>
+                            </ul>
+                        
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+
+    <h3>Tabella:</h3>
+
+    <table class="table">
+        <tbody>
+            <tr *ngFor="let key of keys(modulo.persona)">
+                <td *ngIf="key != 'metodo'">{{key}}</td>
+                <td *ngIf="key != 'metodo'">{{modulo.persona[key]}}</td>
+
+                <td *ngIf="key == 'metodo'">{{modulo.persona.metodo.metodo}}</td>
+                <td *ngIf="key == 'metodo'">{{modulo.persona.metodo.valore}}</td>
+                
+            </tr>
+
+            <tr *ngFor="let key of keys(modulo.assicurazione.copertureAssicurative)">
+                <td>Altre Assicurazioni possedute: {{key}}</td>
+                <td>{{modulo.assicurazione.copertureAssicurative[key]}}</td>
+            </tr>
+            <tr *ngFor="let key of modulo.assicurazione.obbiettivi">
+                <td>{{keys(key)[0]}}</td>
+                <td>
+                    <ul>
+                        <li>
+                            {{key[keys(key)[0]]}}
+                        </li>
+                    </ul>
+                    <span *ngIf="keys(key)[1]">{{keys(key)[1]}}</span>
+                    <ul>
+                        <li *ngFor="let valore of key[keys(key)[1]]">
+                            {{valore}}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+    
+</div>

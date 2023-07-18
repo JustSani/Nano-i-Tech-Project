@@ -11,6 +11,9 @@ import { SecondStepComponent } from './createComponents/second-step/second-step.
 import { ThirdStepComponent } from './createComponents/third-step/third-step.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SecondStepPersonaGiuridicaComponent } from './createComponents/second-step-persona-giuridica/second-step-persona-giuridica.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { SecondStepPersonaGiuridicaComponent } from './createComponents/second-s
   imports: [
     HttpClientModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
