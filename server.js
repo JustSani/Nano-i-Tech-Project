@@ -12,7 +12,7 @@ const conf = require("./config/serverConfig")
 const port = conf.port
 const ip = conf.ip
 */
-const port = 8888;
+const port = process.env.port || 3001;
 
 
 // 
