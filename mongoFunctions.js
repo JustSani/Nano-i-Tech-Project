@@ -65,6 +65,7 @@ mongoFunctions.prototype.insertOne=function (res, col, obj){
             res.end("{code:1, mess: 'done'}")
         });
         promise.catch(function(err){
+            console.log(err)
             obj = { cod:-2, desc:"Errore nell'inserimento"}
             res.end(JSON.stringify(obj));
              

@@ -28,13 +28,12 @@ app.use("/", function(req,res,next){
 })
 
 app.post("/insert", function(req,res){
-    console.log(req.body)
     // convalidare lato server i parametri diventava davvero troppo lungo, ma lo faccio se voelte :)
     mongoFunctions.insertOne(res, "modules", req.body)
 })
 
 app.get("/show", function(req,res){
-    mongoFunctions.find(res, "modules", {salve: "testicolo"}, {})
+    mongoFunctions.find(res, "modules", {}, {})
 })
 
 
