@@ -5,22 +5,13 @@ class PersonaGiuridica {
 
         this.struttura = {
 
-            cognome: "string",
-            nome: "string",
+            ragSoc: "string",
+            pIva: "number",
             cap: "number",
-
-            metodo: [""],
-            valore: "string",
-
-            numeroParenti: "number",
-            coniuge: "boolean",
-            padre: "boolean",
-            madre: "boolean",
-            figli: "number",
-
-            attivita: [""],
-            immobili: [""],
-            animali: [""]
+            settore: "string",
+            immobili: ["SI", "NO"],
         }
     }
+
+
 }
