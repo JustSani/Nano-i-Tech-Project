@@ -43,12 +43,13 @@ class PersonaFisica {
             
         if(typeof(params["metodo"]["valore"]) != this.struttura.metodo.valore)
             check = false
-        
         switch (params["metodo"]["metodo"]){
             case "Codice Fiscale":
                 let regexCodiceFiscale = /^(?:[A-Z][AEIOU][AEIOUX]|[AEIOU]X{2}|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}(?:[\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[15MR][\dLMNP-V]|[26NS][0-8LMNP-U])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM]|[AC-EHLMPR-T][26NS][9V])|(?:[02468LNQSU][048LQU]|[13579MPRTV][26NS])B[26NS][9V])(?:[A-MZ][1-9MNP-V][\dLMNP-V]{2}|[A-M][0L](?:[1-9MNP-V][\dLMNP-V]|[0L][1-9MNP-V]))[A-Z]$/i
-                if(!regexCodiceFiscale.test(params["metodo"]["metodo"]))
+                if(!regexCodiceFiscale.test(params["metodo"]["valore"]))
                     check = false;
+                
+        
                 break;
             case "P.IVA":
                 if(isNaN(params["metodo"]["value"]) || params["metodo"]["valore"].length != 11)
@@ -74,7 +75,6 @@ class PersonaFisica {
                 break;
                             
         }
-
         // array degli attributi gia controllati sopra
         let checkedAttributes = ["cap", "metodo"]
         
@@ -96,6 +96,7 @@ class PersonaFisica {
                 // verifichiamo che il valore sia tra quelli selezionabili
                 else if(!this.struttura[key].includes(params[key])){
                     check = false;
+                    console.log(key)
                 }
             }
         });
